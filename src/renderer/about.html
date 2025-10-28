@@ -1,14 +1,396 @@
+<!--
+
+This is a template for the basic UI of the screen
+
+-->
+
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>LCARS Overlay - About</title>
+    <meta charset = "utf-8"/>
+    <title>LCARS Overlay - Home</title>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
-    <style>body{font-family:system-ui;margin:24px}</style>
+    <style>
+
+      body {background-color : black}
+
+      /*Custom Fonts*/
+      /*Currently not working*/
+
+      @font-face {    
+        font-family: starTrek;
+        src: url(sansation_light.woff);
+      }
+
+      /*Link control*/
+
+      a:link {                                  /*default appearance of links*/
+        color: black;
+        text-decoration: none;
+      }
+
+      a:hover {                                 /*appearance of links when hovered over by the mouse*/
+        color: black;
+        text-decoration: none;
+      }
+
+      a:active {                                /*appearance of links when the link is clicked*/                        
+        color: black;
+        text-decoration: none;
+      }
+
+      a:visited {                               /*appearance of links after they have been used*/
+        color: black;
+        text-decoration: none;
+      }
+
+      /*SHAPE DECLARATION*/
+      /*Make sure shapes are measured in %, allowing for dynamic size changes across resolutions*/
+
+      .home-shape {
+        width: 11%;                                         /*width, measured in %*/
+        height: 15%;                                        /*height, measured in %*/
+        background-color: #9a99ff;                        /*color of the shape*/
+        position: absolute;                                 /*determines how position is handled*/
+        z-index: -1;                                        /*z-index determines stacking, -1 placing shapes at the bottom*/
+        top: 1%;                                            /*vertical position, measured in % from the top of screen*/
+        left: 1%;                                           /*horizontal position, measured in % from the left side of screen*/
+      }
+
+      .under-home-curve {
+        width: 11%;
+        height: 15%;
+        border-radius: 0% 0% 0% 50%;
+        background-color: #ff9a66;
+        position: absolute; 
+        z-index: -1;
+        top: 17%;          
+        left: 1%;        
+      }
+
+      .file-system-shape {
+        width: 11%;
+        height: 39%;
+        background-color: #fe9900;
+        position: absolute;
+        z-index: -1;
+        top: 60%;
+        left: 1%;
+      }
+
+      .about-shape {
+        width: 11%;
+        height: 15%;
+        background-color: #9999cb;
+        position: absolute; 
+        z-index: -1;
+        top: 44%;          
+        left: 1%;        
+      }
+
+      .above-about-shape-curve {
+        height: 9%;
+        width: 11%;
+        border-radius: 50% 0% 0% 0%;
+        background-color: #ff9a66;
+        position: absolute;
+        z-index: -1;
+        top: 34%;
+        left: 1%;
+      }
+
+      .above-about-shape-bar {
+        height: 3%;
+        width: 8%;
+        background-color: #ff9a66;
+        position: absolute;
+        z-index: -1;
+        top: 34%;
+        left: 11.5%;
+      }
+
+      .above-about-shape-inside-curve {
+        height: 9%;
+        width: 11%;
+        border-radius: 50% 0% 0% 0%;
+        background-color: #ff9a66;
+        position: absolute;
+        z-index: -1;
+        top: 34%;
+        left: 7%;
+        }
+            
+      .above-about-shape-inside-curve-square {
+        width: 11%;
+        height: 15%;
+        border-radius: 25% 0% 0% 0%;
+        background-color: black;
+        position: absolute; 
+        z-index: 1;
+        top: 37%;          
+        left: 12%; 
+      }
+
+      .below-home-shape-bar {
+        height: 3%;
+        width: 8%;
+        background-color: #ff9a66;
+        position: absolute;
+        z-index: -1;
+        top: 29%;
+        left: 11.5%;
+      }
+
+      .below-home-shape-inside-curve-square {
+        width: 11%;
+        height: 15%;
+        border-radius: 0% 0% 0% 25%;
+        background-color: black;
+        position: absolute; 
+        z-index: -1;
+        top: 14%;          
+        left: 12%; 
+      }
+
+      .below-home-shape-inside-curve {
+        width: 11%;
+        height: 15%;
+        border-radius: 0% 0% 0% 50%;
+        background-color: #ff9a66;
+        position: absolute; 
+        z-index: -1;
+        top: 17%;          
+        left: 8%; 
+      }
+
+      .back-button-shape {
+        height: 3%;
+        width: 15%;
+        background-color: #cc97c9;
+        position: absolute;
+        z-index: -1;
+        top: 34%;
+        left: 20%;
+      }
+
+      .previous-button-shape {
+        height: 3%;
+        width: 15%;
+        background-color: #cc97c9;
+        position: absolute;
+        z-index: -1;
+        top: 29%;
+        left: 20%;
+      }
+
+      .back-bar-mid {
+        height: 3%;
+        width: 48%;
+        background-color: #9c99cc;
+        position: absolute;
+        z-index: -1;
+        top: 34%;
+        left: 35.5%;
+      }
+
+      .previous-bar-mid {
+        height: 3%;
+        width: 48%;
+        background-color: #9c99cc;
+        position: absolute;
+        z-index: -1;
+        top: 29%;
+        left: 35.5%;
+      }
+
+      .previous-bar-end {
+        height: 3%;
+        width: 15%;
+        background-color: #fd9a35;
+        position: absolute;
+        z-index: -1;
+        top: 29%;
+        left: 84%;
+      }
+
+      .back-bar-end {
+        height: 3%;
+        width: 15%;
+        background-color: #fd9a35;
+        position: absolute;
+        z-index: -1;
+        top: 34%;
+        left: 84%;
+      }
+
+      .LCARS-interface-online-square {
+        height: 1.6%;
+        width: 1%;
+        background-color: white;
+        position: absolute;
+        z-index: -1;
+        top: 6.45%;
+        left: 88.5%;
+      }
+
+      /*TEXT FUNCTIONS*/
+
+      .file-system {
+        top: 90%;
+        left: 2%;
+        font-size: 30px;
+        position: absolute;
+        font-family:'Courier New', Courier, monospace;      /*allows for custom fonts*/
+        word-wrap: normal;                                  /*word wrapping*/
+        width:10%;                                          /*size of invisible textbox*/
+        color: black;                                     /*font color*/
+      }
+
+      .about-button {
+        top: 55%;
+        left: 2%;
+        font-size: 30px;
+        position: absolute;
+        font-family:'Courier New', Courier, monospace;
+        color: black;
+      }
+
+      .home-button {
+        top: 12%;
+        left: 2%;
+        font-size: 30px;
+        position: absolute;
+        font-family:'Courier New', Courier, monospace;
+        color: black;
+      }
+
+      .back-button {
+        top: 29%;
+        left: 25.5%;
+        font-size: 20px;
+        position: absolute;
+        font-family:'Courier New', Courier, monospace;
+        color: black;
+      }
+
+      .previous-button {
+        top: 33.9%;
+        left: 23.5%;
+        font-size: 20px;
+        position: absolute;
+        font-family: 'Courier New', Courier, monospace;
+        color: black;
+      }
+
+
+      .about-placeholder-shape {
+        height: 50%;
+        width: 65%;
+        background-color: white;
+        position: absolute;
+        z-index: -1;
+        top: 45%;
+        left: 25%;
+      }
+
+      .LCARS-interface-text {
+        top: 5%;
+        left: 65%;
+        font-size: 30px;
+        position: absolute;
+        font-family: 'Courier New', Courier, monospace;
+        color: white;
+      }
+
+      .LCARS-interface-online-text {
+        top: 5%;
+        left: 90%;
+        font-size: 30px;
+        position: absolute;
+        font-family: 'Courier New', Courier, monospace;
+        color: white;
+      }
+
+      .about-placeholder-text {
+        top: 55%;
+        left: 37%;
+        font-size: 60px;
+        text-wrap: normal;
+        width: 40%;
+        position: absolute;
+        text-align: center;
+        font-family:'Courier New', Courier, monospace;
+        color: black;
+      }
+
+
+    </style>
   </head>
   <body>
-    <h1>ABOUT</h1>
-    <p>Placeholder page.</p>
-    <p><a href="./index.html">← Back to Home</a></p>
+    
+    <!-- UI shape function calls-->
+    <div class="under-home-curve"></div>
+    <div class="above-about-shape-curve"></div>
+    <div class="above-about-shape-bar"></div>
+    <div class="below-home-shape-bar"></div>
+    <div class="back-bar-end"></div>
+    <div class="previous-bar-end"></div>
+    <div class="back-bar-mid"></div>
+    <div class="previous-bar-mid"></div>
+    <div class="below-home-shape-inside-curve"></div>
+    <div class="below-home-shape-inside-curve-square"></div>
+    <div class="above-about-shape-inside-curve-square"></div>
+    <div class="above-about-shape-inside-curve"></div>
+
+    <!--LCARS interface text in top left-->
+    <div class="LCARS-interface-text"><b>LCARS INTERFACE</b></div>
+    <div class="LCARS-interface-online-text"><b>ONLINE</b></div>
+    <div class="LCARS-interface-online-square"></div>
+    
+    <!--Placeholder for center of screen-->
+    <div class="about-placeholder-shape"></div>
+
+    <!--UI text function calls-->
+
+    <div class="file-system">
+      <a href="./filesystem.html">File System</a>
+    </div>
+    <article>
+      <a href="./filesystem.html" class="file-system-shape"></a>
+    </article>
+      
+    <div class="about-button">
+      <a href="./about.html">About</a>
+    </div>
+    <article>
+      <a href="./about.html" class="about-shape"></a>
+    </article>
+
+    <div class="home-button">
+      <a href="./home.html">Home</a>
+    </div>
+    <article>
+      <a href="./home.html" class="home-shape"></a>
+    </article>
+
+    <div class="back-button">
+      <a href="./home.html">Back</a>            <!--Back button currently non-functional-->
+    </div>
+    <article>
+      <a href="./home.html" class="back-button-shape"></a>
+    </article>
+
+    <div class="previous-button">
+      <a href="./home.html">Previous</a>        <!--Previous button currently non-functional-->
+    </div>
+    <article>
+      <a href="./home.html" class="previous-button-shape"></a>
+    </article>
+
+    
+
+    <div class="about-placeholder-text">ABOUT PLACEHOLDER TEXT</div>
+
+
   </body>
 </html>
