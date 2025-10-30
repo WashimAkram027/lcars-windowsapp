@@ -11,20 +11,29 @@ LCARS (Library Computer Access/Retrieval System) is the iconic computer interfac
 ```
 lcars-windowsapp/
 ├── src/
-│   ├── main/                 # Electron main process
-│   │   ├── app.js           # Application entry point
-│   │   └── windows.js       # Window management
-│   ├── preload/             # Preload scripts (secure bridge)
-│   │   └── index.js         # API exposure to renderer
-│   └── renderer/            # Frontend UI (HTML/CSS/JS)
-│       ├── index.html       # Home page
-│       ├── filesystem.html  # File system browser
-│       ├── gallery.html     # Media gallery
-│       ├── about.html       # System information
-│       └── network.html     # Network monitoring
-├── package.json             # Project dependencies
-├── package-lock.json        # Dependency lock file
-└── .gitignore              # Git ignore rules
+│   ├── main/                    # Electron main process (Node.js backend)
+│   │   ├── app.js              # Application entry point & IPC registration
+│   │   ├── windows.js          # Window management
+│   │   ├── filesystem.js       # File system operations handler
+│   │   ├── network.js          # Network monitoring handler
+│   │   └── system.js           # System information handler
+│   ├── preload/                # Preload scripts (secure bridge)
+│   │   └── index.js            # API exposure to renderer (window.api)
+│   └── renderer/               # Frontend UI (HTML/CSS/JS)
+│       ├── home.html           # Home page with LCARS design
+│       ├── filesystem.html     # File system browser
+│       ├── filesystem.js       # File browser client logic
+│       ├── gallery.html        # Photo gallery
+│       ├── gallery.js          # Gallery client logic
+│       ├── about.html          # System information page
+│       ├── about.js            # System info client logic
+│       ├── network.html        # Network monitoring page
+│       ├── network.js          # Network client logic
+│       └── src/images/         # UI assets (enterprise, startup gifs)
+├── package.json                # Project dependencies
+├── package-lock.json           # Dependency lock file
+├── README.md                   # This file
+└── .gitignore                  # Git ignore rules
 ```
 
 ## Architecture
@@ -37,22 +46,43 @@ This application follows Electron's three-process architecture:
 
 ## Current Features
 
-This is a skeleton/starter project with the following foundation:
+### Core Functionality ✅
 
-- ✅ Frameless, always-on-top window (overlay mode)
-- ✅ Single instance lock (prevents multiple app instances)
-- ✅ Secure architecture (Context Isolation, Sandbox enabled)
-- ✅ Content Security Policy (CSP) implementation
-- ✅ Navigation between placeholder pages
-- ✅ ES6 module support throughout
+- ✅ **LCARS-themed UI** - Full Star Trek-inspired interface design
+- ✅ **Frameless overlay window** - Always-on-top, 1200x800 frameless window
+- ✅ **Single instance lock** - Prevents multiple app instances
+- ✅ **Secure architecture** - Context Isolation, Sandbox enabled, CSP headers
+- ✅ **IPC Communication** - Full main-renderer process communication
 
-### Planned Pages
+### Implemented Pages
 
-1. **Home** - Main navigation hub
-2. **File System** - Browse and interact with local files
-3. **Gallery** - View images and media
-4. **About** - System and application information
-5. **Network** - Network status and connectivity monitoring
+1. **Home** (`home.html`)
+   - Main navigation hub with LCARS design
+   - Network status indicator (clickable)
+   - Navigation to all other pages
+
+2. **File System** (`filesystem.html`)
+   - Browse local drives and directories
+   - Navigate directory tree
+   - View file/folder information
+   - File size and modification dates
+
+3. **Gallery** (`gallery.html`)
+   - Recent photos from Pictures folder
+   - Photo grid display with metadata
+   - Click for detailed photo information
+
+4. **About** (`about.html`)
+   - Device specifications (CPU, RAM, system type)
+   - OS information (edition, version, build)
+   - System status (uptime, memory usage)
+   - Application version and runtime info
+
+5. **Network** (`network.html`)
+   - Real-time internet connection status
+   - Network interface information (IP addresses)
+   - Auto-refresh every 10 seconds
+   - DNS and HTTPS connectivity checks
 
 ## Requirements
 
@@ -92,6 +122,80 @@ The LCARS overlay window will open on your desktop.
 - **`npm run dev`** - Start the Electron application in development mode
 - **`npm run clean`** - Clean the project (removes node_modules and build artifacts)
 
+## Git Workflow
+
+This repository uses a multi-branch development strategy to keep the main branch stable.
+
+### Branch Structure
+
+```
+main          ← Stable, production-ready code
+├── washim-dev   ← Washim's development branch
+└── chase-dev    ← Chase's development branch (UI/Design)
+```
+
+### Working with Your Development Branch
+
+#### **For Washim (Backend & Integration)**
+
+**Switch to your branch:**
+```bash
+git checkout washim-dev
+```
+
+**Pull latest changes:**
+```bash
+git pull origin washim-dev
+```
+
+**Make changes, then commit and push:**
+```bash
+git add .
+git commit -m "Your descriptive commit message"
+git push origin washim-dev
+```
+
+#### **For Chase (UI & Design)**
+
+**Switch to your branch:**
+```bash
+git checkout chase-dev
+```
+
+**Pull latest changes:**
+```bash
+git pull origin chase-dev
+```
+
+**Make changes, then commit and push:**
+```bash
+git add .
+git commit -m "Your descriptive commit message"
+git push origin chase-dev
+```
+
+### Merging to Main
+
+When your feature is ready:
+
+1. **Create a Pull Request** on GitHub from your dev branch to `main`
+2. **Request review** from team members
+3. **Merge** after approval (this keeps main stable)
+
+**Quick PR Links:**
+- Washim: https://github.com/WashimAkram027/lcars-windowsapp/pull/new/washim-dev
+- Chase: https://github.com/WashimAkram027/lcars-windowsapp/pull/new/chase-dev
+
+### Syncing with Main
+
+To get latest changes from main into your dev branch:
+
+```bash
+git checkout washim-dev  # or chase-dev
+git pull origin main      # Pull latest from main
+git push origin washim-dev  # Push merged changes
+```
+
 ## Security Features
 
 This project implements Electron security best practices:
@@ -104,13 +208,19 @@ This project implements Electron security best practices:
 
 ## Development Status
 
-⚠️ **Current Status**: Early development / Skeleton phase
+✅ **Current Status**: Active Development - Core Features Implemented
 
-This project currently consists of:
-- Basic application structure
-- Placeholder pages with minimal styling
-- Security foundation
-- No functional features yet (API methods are placeholders)
+This project now includes:
+- ✅ Full LCARS UI design and theming
+- ✅ Working backend modules (filesystem, network, system info)
+- ✅ IPC communication between main and renderer processes
+- ✅ All core pages functional with live data
+- ⚠️ Network status on home page (placeholder - needs real-time implementation)
+
+### Collaborators
+
+- **Washim Akram** - Backend development, integration, architecture
+- **Chase (CloggedOsprey4)** - UI/UX design, LCARS interface implementation
 
 ## Window Configuration
 
@@ -122,12 +232,13 @@ The main window is configured as:
 
 ## Next Steps
 
-Future development will include:
-- LCARS-themed UI design (colors, fonts, layouts)
-- IPC (Inter-Process Communication) implementation
-- Real functionality for file system browsing
-- Network monitoring capabilities
-- System information display
-- Media gallery with image/video support
+Planned enhancements:
+- 🔄 Real-time network status on home page
+- 🎨 Additional LCARS UI polish and animations
+- 🖼️ Image thumbnail support in gallery
+- 📁 Enhanced file operations (copy, move, delete)
+- ⚙️ User settings and preferences
+- 🎯 Custom hotkeys for show/hide overlay
+- 📦 Build and packaging for Windows installer
 
 
