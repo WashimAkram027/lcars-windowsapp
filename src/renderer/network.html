@@ -3,12 +3,226 @@
   <head>
     <meta charset="utf-8" />
     <title>LCARS Overlay - Network</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
-    <style>body{font-family:system-ui;margin:24px}</style>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #000;
+        color: #fff;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #333;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #ff9900;
+      }
+
+      .nav-links a {
+        color: #66ccff;
+        text-decoration: none;
+        margin-left: 15px;
+      }
+
+      .nav-links a:hover {
+        text-decoration: underline;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .section {
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 20px;
+      }
+
+      .section h2 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        color: #ff9900;
+        border-bottom: 1px solid #333;
+        padding-bottom: 8px;
+      }
+
+      .status-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        background: #0a0a0a;
+        border-radius: 4px;
+      }
+
+      .status-indicator {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        border: 3px solid;
+      }
+
+      .status-indicator.online {
+        background: #004400;
+        border-color: #00ff00;
+        color: #00ff00;
+      }
+
+      .status-indicator.offline {
+        background: #440000;
+        border-color: #ff0000;
+        color: #ff0000;
+      }
+
+      .status-indicator.checking {
+        background: #222;
+        border-color: #66ccff;
+        color: #66ccff;
+      }
+
+      .status-text {
+        flex: 1;
+      }
+
+      .status-title {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+
+      .status-title.online {
+        color: #00ff00;
+      }
+
+      .status-title.offline {
+        color: #ff0000;
+      }
+
+      .status-title.checking {
+        color: #66ccff;
+      }
+
+      .status-details {
+        font-size: 13px;
+        color: #999;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+
+      .info-label {
+        color: #999;
+        font-size: 14px;
+      }
+
+      .info-value {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .interface-item {
+        background: #0a0a0a;
+        padding: 12px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        border-left: 3px solid #66ccff;
+      }
+
+      .interface-name {
+        font-weight: 500;
+        color: #66ccff;
+        margin-bottom: 8px;
+      }
+
+      .interface-address {
+        font-size: 13px;
+        color: #999;
+        margin-left: 15px;
+        margin-bottom: 4px;
+      }
+
+      .refresh-button {
+        padding: 8px 16px;
+        background: #333;
+        color: #fff;
+        border: 1px solid #666;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .refresh-button:hover {
+        background: #444;
+      }
+
+      .auto-refresh-info {
+        font-size: 12px;
+        color: #666;
+        margin-top: 10px;
+      }
+    </style>
   </head>
   <body>
-    <h1>NETWORK</h1>
-    <p>Placeholder page.</p>
-    <p><a href="./index.html">← Back to Home</a></p>
+    <div class="header">
+      <h1>NETWORK</h1>
+      <div class="nav-links">
+        <a href="./index.html">← Home</a>
+        <a href="./filesystem.html">File System</a>
+        <a href="./gallery.html">Gallery</a>
+        <a href="./about.html">About</a>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Connection Status -->
+      <div class="section">
+        <h2>Connection Status</h2>
+        <div class="status-container">
+          <div class="status-indicator checking" id="status-indicator">
+            ⏳
+          </div>
+          <div class="status-text">
+            <div class="status-title checking" id="status-title">Checking connection...</div>
+            <div class="status-details" id="status-details">Please wait...</div>
+          </div>
+        </div>
+        <div style="margin-top: 15px;">
+          <button class="refresh-button" id="refresh-button">🔄 Refresh Now</button>
+          <div class="auto-refresh-info">Auto-refreshes every 10 seconds</div>
+        </div>
+      </div>
+
+      <!-- Network Interfaces -->
+      <div class="section">
+        <h2>Network Interfaces</h2>
+        <div id="interfaces-container">
+          <div style="color: #666;">Loading network interfaces...</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./network.js"></script>
   </body>
 </html>

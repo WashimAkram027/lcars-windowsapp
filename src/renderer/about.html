@@ -3,12 +3,184 @@
   <head>
     <meta charset="utf-8" />
     <title>LCARS Overlay - About</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
-    <style>body{font-family:system-ui;margin:24px}</style>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #000;
+        color: #fff;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #333;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #ff9900;
+      }
+
+      .nav-links a {
+        color: #66ccff;
+        text-decoration: none;
+        margin-left: 15px;
+      }
+
+      .nav-links a:hover {
+        text-decoration: underline;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .section {
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 20px;
+      }
+
+      .section h2 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        color: #ff9900;
+        border-bottom: 1px solid #333;
+        padding-bottom: 8px;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+
+      .info-label {
+        color: #999;
+        font-size: 14px;
+      }
+
+      .info-value {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .loading {
+        color: #66ccff;
+        font-style: italic;
+      }
+
+      .error {
+        color: #ff6666;
+        font-style: italic;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        background: #1a1a1a;
+        border-radius: 3px;
+        font-size: 13px;
+        margin-right: 8px;
+        border-left: 3px solid #66ccff;
+      }
+
+      .app-info {
+        border-left-color: #ff9900;
+      }
+    </style>
   </head>
   <body>
-    <h1>ABOUT</h1>
-    <p>Placeholder page.</p>
-    <p><a href="./index.html">← Back to Home</a></p>
+    <div class="header">
+      <h1>ABOUT</h1>
+      <div class="nav-links">
+        <a href="./index.html">← Home</a>
+        <a href="./filesystem.html">File System</a>
+        <a href="./gallery.html">Gallery</a>
+        <a href="./network.html">Network</a>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Device Specifications -->
+      <div class="section">
+        <h2>Device Specifications</h2>
+        <div class="info-grid">
+          <div class="info-label">Device name</div>
+          <div class="info-value loading" id="device-name">Loading...</div>
+
+          <div class="info-label">Processor</div>
+          <div class="info-value loading" id="processor">Loading...</div>
+
+          <div class="info-label">Installed RAM</div>
+          <div class="info-value loading" id="ram">Loading...</div>
+
+          <div class="info-label">System type</div>
+          <div class="info-value loading" id="system-type">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Windows Specifications -->
+      <div class="section">
+        <h2>Windows Specifications</h2>
+        <div class="info-grid">
+          <div class="info-label">Edition</div>
+          <div class="info-value loading" id="os-edition">Loading...</div>
+
+          <div class="info-label">Version</div>
+          <div class="info-value loading" id="os-version">Loading...</div>
+
+          <div class="info-label">OS build</div>
+          <div class="info-value loading" id="os-build">Loading...</div>
+
+          <div class="info-label">Platform</div>
+          <div class="info-value loading" id="platform">Loading...</div>
+        </div>
+      </div>
+
+      <!-- System Status -->
+      <div class="section">
+        <h2>System Status</h2>
+        <div class="info-grid">
+          <div class="info-label">System uptime</div>
+          <div class="info-value loading" id="uptime">Loading...</div>
+
+          <div class="info-label">Memory usage</div>
+          <div class="info-value loading" id="memory-usage">Loading...</div>
+
+          <div class="info-label">Free memory</div>
+          <div class="info-value loading" id="free-memory">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Application Information -->
+      <div class="section">
+        <h2>Application Information</h2>
+        <div class="info-grid">
+          <div class="info-label">App name</div>
+          <div class="info-value loading" id="app-name">Loading...</div>
+
+          <div class="info-label">Version</div>
+          <div class="info-value loading" id="app-version">Loading...</div>
+
+          <div class="info-label">Runtime</div>
+          <div class="info-value loading" id="runtime-info">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./about.js"></script>
   </body>
 </html>
