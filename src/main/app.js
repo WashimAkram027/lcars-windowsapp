@@ -1,12 +1,20 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
 import { createMainWindow } from './windows.js';
+import { registerFilesystemHandlers } from './filesystem.js';
+import { registerSystemHandlers } from './system.js';
+import { registerNetworkHandlers } from './network.js';
 
 if (!app.requestSingleInstanceLock()) {
   app.quit();
 }
 
 app.on('ready', async () => {
+  // Register IPC handlers before creating window
+  registerFilesystemHandlers();
+  registerSystemHandlers();
+  registerNetworkHandlers();
+
   await createMainWindow();
 });
 

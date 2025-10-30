@@ -331,6 +331,55 @@
         color: black;
       }
 
+      /* File List Styles */
+      .item-list {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .item {
+        display: grid;
+        grid-template-columns: 30px 1fr 100px 150px;
+        gap: 10px;
+        padding: 8px;
+        background-color: #f0f0f0;
+        border-left: 4px solid #fe9900;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .item:hover {
+        background-color: #ff9a66;
+      }
+
+      .item-icon {
+        font-size: 18px;
+      }
+
+      .item-name {
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .item-size {
+        text-align: right;
+        color: #666;
+      }
+
+      .item-modified {
+        color: #666;
+        font-size: 12px;
+      }
+
+      .empty-message {
+        text-align: center;
+        color: #999;
+        padding: 40px;
+        font-style: italic;
+      }
 
     </style>
   </head>
@@ -355,8 +404,12 @@
     <div class="LCARS-interface-online-text"><b>ONLINE</b></div>
     <div class="LCARS-interface-online-square"></div>
 
-    <!--Placeholder for file information-->
-    <div class="file-information-placeholder-shape"></div>
+    <!--File System Display Area-->
+    <div class="file-information-placeholder-shape">
+      <div id="current-path" style="font-family: 'Courier New', Courier, monospace; font-size: 16px; padding: 10px; color: #fe9900; font-weight: bold;">My PC</div>
+      <div id="file-list" style="padding: 10px; color: black; font-family: 'Courier New', Courier, monospace; font-size: 14px; overflow-y: auto; height: calc(100% - 80px);"></div>
+      <div id="status" style="font-family: 'Courier New', Courier, monospace; font-size: 12px; padding: 10px; color: #9999cb; position: absolute; bottom: 10px;">Loading...</div>
+    </div>
 
     <!--UI text function calls-->
 
@@ -382,21 +435,20 @@
     </article>
 
     <div class="back-button">
-      <a href="./home.html">Back</a>            <!--Back button currently non-functional-->
+      <a href="#" id="back-btn">Back</a>            <!--Back button - navigate up one level-->
     </div>
     <article>
-      <a href="./home.html" class="back-button-shape"></a>
+      <a href="#" id="back-btn-shape" class="back-button-shape"></a>
     </article>
 
     <div class="previous-button">
-      <a href="./home.html">Previous</a>        <!--Previous button currently non-functional-->
+      <a href="#" id="refresh-btn">Refresh</a>        <!--Refresh button - reload current view-->
     </div>
     <article>
-      <a href="./home.html" class="previous-button-shape"></a>
+      <a href="#" id="refresh-btn-shape" class="previous-button-shape"></a>
     </article>
 
 
-    <div class="file-information-placeholder-text">FILE SYSTEM INFORMATION PLACEHOLDER</div>
-    
+    <script src="filesystem.js"></script>
   </body>
 </html>

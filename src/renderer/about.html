@@ -347,8 +347,76 @@ This is a template for the basic UI of the screen
     <div class="LCARS-interface-online-text"><b>ONLINE</b></div>
     <div class="LCARS-interface-online-square"></div>
     
-    <!--Placeholder for center of screen-->
-    <div class="about-placeholder-shape"></div>
+    <!--System Information Display-->
+    <div class="about-placeholder-shape" style="padding: 20px; overflow-y: auto; font-family: 'Courier New', Courier, monospace;">
+
+      <!-- Device Specifications -->
+      <div style="margin-bottom: 20px;">
+        <h2 style="color: #fe9900; border-bottom: 2px solid #fe9900; padding-bottom: 5px;">DEVICE SPECIFICATIONS</h2>
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px;">
+          <div style="font-weight: bold;">Device Name:</div>
+          <div id="device-name" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">Processor:</div>
+          <div id="processor" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">Installed RAM:</div>
+          <div id="ram" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">System Type:</div>
+          <div id="system-type" class="loading">Loading...</div>
+        </div>
+      </div>
+
+      <!-- OS Specifications -->
+      <div style="margin-bottom: 20px;">
+        <h2 style="color: #9999cb; border-bottom: 2px solid #9999cb; padding-bottom: 5px;">OS SPECIFICATIONS</h2>
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px;">
+          <div style="font-weight: bold;">Edition:</div>
+          <div id="os-edition" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">Version:</div>
+          <div id="os-version" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">OS Build:</div>
+          <div id="os-build" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">Platform:</div>
+          <div id="platform" class="loading">Loading...</div>
+        </div>
+      </div>
+
+      <!-- System Status -->
+      <div style="margin-bottom: 20px;">
+        <h2 style="color: #9a99ff; border-bottom: 2px solid #9a99ff; padding-bottom: 5px;">SYSTEM STATUS</h2>
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px;">
+          <div style="font-weight: bold;">System Uptime:</div>
+          <div id="uptime" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">Memory Usage:</div>
+          <div id="memory-usage" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">Free Memory:</div>
+          <div id="free-memory" class="loading">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Application Information -->
+      <div style="margin-bottom: 20px;">
+        <h2 style="color: #cc97c9; border-bottom: 2px solid #cc97c9; padding-bottom: 5px;">APPLICATION INFO</h2>
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px;">
+          <div style="font-weight: bold;">App Name:</div>
+          <div id="app-name" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">Version:</div>
+          <div id="app-version" class="loading">Loading...</div>
+
+          <div style="font-weight: bold;">Runtime:</div>
+          <div id="runtime-info" class="loading">Loading...</div>
+        </div>
+      </div>
+
+    </div>
 
     <!--UI text function calls-->
 
@@ -387,10 +455,6 @@ This is a template for the basic UI of the screen
       <a href="./home.html" class="previous-button-shape"></a>
     </article>
 
-    
-
-    <div class="about-placeholder-text">ABOUT PLACEHOLDER TEXT</div>
-
-
+    <script src="about.js"></script>
   </body>
 </html>
