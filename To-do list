@@ -18,3 +18,8 @@ of the file. There, some basic documentation exists to how the different element
 For assistance, reference the "home" page and how it handles the "home-screen-splash-screen-placeholder" (function at line 335, function call
 at line 482).
 
+6.) Network interface on the home page displays a green checkmark, despite not being connected to the internet. This is a bug that needs to be fixed.
+
+7.) implement a terminal for extra brownie points
+
+
