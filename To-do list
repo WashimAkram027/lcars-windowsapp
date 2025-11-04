@@ -1,0 +1,20 @@
+To-do list for LCARS functionality. Pick and choose tasks. Please put your name next to the task you are working on and resubmit to GitHub.
+If any other ideas come up, please add them to this list and publish back to GitHub.
+
+1.) Implement "return" button to file browser. This will be a copy-paste of the "file-system-button" HTML code to a new button named "return"
+placed somewhere close to the file browser, allowing for the user returning directly back to the file home page
+
+2.) Implement file management to the file browser. This includes both file adding and deleting, as well as being able to move files to different
+folders.
+
+3.) Add functionality to the "LCARS online" element to properly display whether the internet connection is online or offline. Currently, the
+connection screen on the home page only works once. A solution would be to call the "refresh" button's function each time the user opens
+another page.
+
+4.) Re-color the elements on the file system browser to better match the LCARS theme. If you need help, reference the home page at the top
+of the file. There, some basic documentation exists to how the different elements work.
+
+5.) Add a proper startup animation/screen fitting the LCARS theme upon startup. VS code can read gifs and images in the respective folder.
+For assistance, reference the "home" page and how it handles the "home-screen-splash-screen-placeholder" (function at line 335, function call
+at line 482).
+
