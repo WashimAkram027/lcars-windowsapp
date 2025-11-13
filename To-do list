@@ -35,3 +35,10 @@ Assigned:
 7.) implement a terminal for extra brownie points
 
 Assigned:
+
+8.) Modify the file browser UI to use bubbles instead of bars, then allow them to create multiple columns tp create a more authentic LCARS look. Possible
+methods probably involve messing with the AI coded backend code that dynamically creates elements. I (Chase) spent a lot of time figuring out the methods
+the AI used, so feel free to ask for help in understanding the methods.
+
+Assigned:
+(Bars have been replaced with bubbles. Still needs to create multi-column table instead of a list. -Chase)
