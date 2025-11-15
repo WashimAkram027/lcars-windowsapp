@@ -4,7 +4,7 @@ If any other ideas come up, please add them to this list and publish back to Git
 1.) Implement "return" button to file browser. This will be a copy-paste of the "file-system-button" HTML code to a new button named "return"
 placed somewhere close to the file browser, allowing for the user returning directly back to the file home page
 
-Assigned:
+Assigned: Kaylynn 
 
 2.) Implement file management to the file browser. This includes both file adding and deleting, as well as being able to move files to different
 folders.
