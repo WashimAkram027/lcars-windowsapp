@@ -286,7 +286,7 @@ This is a template for the basic UI of the screen
       .about-placeholder-shape {
         height: 50%;
         width: 65%;
-        background-color: white;
+        background-color: black;
         position: absolute;
         z-index: -1;
         top: 45%;
@@ -343,17 +343,19 @@ This is a template for the basic UI of the screen
     <div class="above-about-shape-inside-curve"></div>
 
     <!--LCARS interface text in top left-->
-    <div class="LCARS-interface-text"><b>LCARS INTERFACE</b></div>
+    <div id = "host-name" class = "LCARS-interface-text"><b>LCARS INTERFACE</b></div>
     <div class="LCARS-interface-online-text"><b>ONLINE</b></div>
     <div class="LCARS-interface-online-square"></div>
+
     
+
     <!--System Information Display-->
     <div class="about-placeholder-shape" style="padding: 20px; overflow-y: auto; font-family: 'Courier New', Courier, monospace;">
 
       <!-- Device Specifications -->
       <div style="margin-bottom: 20px;">
         <h2 style="color: #fe9900; border-bottom: 2px solid #fe9900; padding-bottom: 5px;">DEVICE SPECIFICATIONS</h2>
-        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px;">
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px; color:#efc413">
           <div style="font-weight: bold;">Device Name:</div>
           <div id="device-name" class="loading">Loading...</div>
 
@@ -371,7 +373,7 @@ This is a template for the basic UI of the screen
       <!-- OS Specifications -->
       <div style="margin-bottom: 20px;">
         <h2 style="color: #9999cb; border-bottom: 2px solid #9999cb; padding-bottom: 5px;">OS SPECIFICATIONS</h2>
-        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px;">
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px; color:#efc413">
           <div style="font-weight: bold;">Edition:</div>
           <div id="os-edition" class="loading">Loading...</div>
 
@@ -389,7 +391,7 @@ This is a template for the basic UI of the screen
       <!-- System Status -->
       <div style="margin-bottom: 20px;">
         <h2 style="color: #9a99ff; border-bottom: 2px solid #9a99ff; padding-bottom: 5px;">SYSTEM STATUS</h2>
-        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px;">
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px; color:#efc413">
           <div style="font-weight: bold;">System Uptime:</div>
           <div id="uptime" class="loading">Loading...</div>
 
@@ -404,7 +406,7 @@ This is a template for the basic UI of the screen
       <!-- Application Information -->
       <div style="margin-bottom: 20px;">
         <h2 style="color: #cc97c9; border-bottom: 2px solid #cc97c9; padding-bottom: 5px;">APPLICATION INFO</h2>
-        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px;">
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-top: 10px; color:#efc413">
           <div style="font-weight: bold;">App Name:</div>
           <div id="app-name" class="loading">Loading...</div>
 

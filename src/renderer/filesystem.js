@@ -11,6 +11,36 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadDrives();
 });
 
+
+//Lines 15-42 display host name
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadHostName();
+});
+
+async function loadHostName()
+{
+  const [hostName] = await Promise.all([
+    window.api.system.getSystemInfo(),
+  ])
+
+  displayHostName(hostName);
+} 
+
+function displayHostName(hostName)
+{
+  setElementText('host-name', hostName.hostname);
+}
+
+function setElementText(elementId, text) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.textContent = text;
+    element.classList.remove('loading');
+    element.classList.remove('error');
+    element.classList.remove('LCARS-interface-online-text');
+  }
+}
+
 /**
  * Set up event listeners
  */
@@ -293,6 +323,7 @@ async function navigateHome() {
   try {
     const homeDir = await window.api.fs.getHomeDir();
     await loadDirectory(homeDir);
+    navigateUp();
   } catch (error) {
     console.error('Error navigating home:', error);
     updateStatus('Error: ' + error.message);
@@ -380,3 +411,11 @@ function formatDate(isoString) {
   const date = new Date(isoString);
   return date.toLocaleString();
 }
+
+const hostName = window.api.system.getSystemInfo();
+
+function displayHostName(hostName)
+{
+  setElementText('host-name', hostName.hostname)
+}
+

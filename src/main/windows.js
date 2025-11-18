@@ -9,8 +9,8 @@ export async function createMainWindow() {
     width: 1200,
     height: 800,
     show: true,
-    frame: false,            // overlay vibe (frameless)
-    alwaysOnTop: true,       // stays above other windows
+    frame: true,            // true for windowed, false for framless
+    alwaysOnTop: false,       // stays above other windows
     transparent: false,      // set true later if you want HUD
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),

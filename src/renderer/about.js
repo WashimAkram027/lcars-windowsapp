@@ -44,6 +44,9 @@ async function loadSystemInformation() {
  * Display Device Specifications section
  */
 function displayDeviceSpecs(systemInfo, cpuInfo, memoryInfo) {
+  // Host Name
+  setElementText('host-name', systemInfo.hostname || 'Unknown');
+ 
   // Device name
   setElementText('device-name', systemInfo.hostname || 'Unknown');
 
@@ -118,6 +121,7 @@ function setElementText(elementId, text) {
     element.textContent = text;
     element.classList.remove('loading');
     element.classList.remove('error');
+    element.classList.remove('LCARS-interface-online-text');
   }
 }
 
