@@ -1,0 +1,21 @@
+{
+  "name": "lcars-windowsapp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LCARS Windows overlay (Electron starter: main/preload/renderer skeleton)",
+  "main": "src/main/app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "electron .",
+    "clean": "git clean -fdX && git reset --hard"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^38.4.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
