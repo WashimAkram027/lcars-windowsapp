@@ -1,19 +1,8 @@
-<!--TO DO LIST
-
-
-
-
-
-
-
-
--->
-
 <!doctype html>
 <html>
   <head>
-    <meta charset = "utf-8"/>
-    <title>LCARS Overlay - Home</title>
+    <meta charset="utf-8"/>
+    <title>LCARS Overlay - Terminal</title>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
     <link rel="stylesheet" href="lcars-effects.css">
     <style>
@@ -21,46 +10,41 @@
       body {background-color : black}
 
       /*Custom Fonts*/
-      /*Currently not working*/
-
-      @font-face {    
+      @font-face {
         font-family: starTrek;
         src: url(sansation_light.woff);
       }
 
       /*Link control*/
-
-      a:link {                                  /*default appearance of links*/
+      a:link {
         color: black;
         text-decoration: none;
       }
 
-      a:hover {                                 /*appearance of links when hovered over by the mouse*/
+      a:hover {
         color: black;
         text-decoration: none;
       }
 
-      a:active {                                /*appearance of links when the link is clicked*/                        
+      a:active {
         color: black;
         text-decoration: none;
       }
 
-      a:visited {                               /*appearance of links after they have been used*/
+      a:visited {
         color: black;
         text-decoration: none;
       }
 
       /*SHAPE DECLARATION*/
-      /*Make sure shapes are measured in %, allowing for dynamic size changes across resolutions*/
-
       .home-shape {
-        width: 11%;                                         /*width, measured in %*/
-        height: 15%;                                        /*height, measured in %*/
-        background-color: #9a99ff;                        /*color of the shape*/
-        position: absolute;                                 /*determines how position is handled*/
-        z-index: -1;                                        /*z-index determines stacking, -1 placing shapes at the bottom*/
-        top: 1%;                                            /*vertical position, measured in % from the top of screen*/
-        left: 1%;                                           /*horizontal position, measured in % from the left side of screen*/
+        width: 11%;
+        height: 15%;
+        background-color: #9a99ff;
+        position: absolute;
+        z-index: -1;
+        top: 1%;
+        left: 1%;
       }
 
       .under-home-curve {
@@ -68,10 +52,10 @@
         height: 15%;
         border-radius: 0% 0% 0% 50%;
         background-color: #ff9a66;
-        position: absolute; 
+        position: absolute;
         z-index: -1;
-        top: 17%;          
-        left: 1%;        
+        top: 17%;
+        left: 1%;
       }
 
       .file-system-shape {
@@ -144,17 +128,17 @@
         z-index: -1;
         top: 34%;
         left: 7%;
-        }
-            
+      }
+
       .above-about-shape-inside-curve-square {
         width: 11%;
         height: 15%;
         border-radius: 25% 0% 0% 0%;
         background-color: black;
-        position: absolute; 
+        position: absolute;
         z-index: 1;
-        top: 37%;          
-        left: 12%; 
+        top: 37%;
+        left: 12%;
       }
 
       .below-home-shape-bar {
@@ -172,10 +156,10 @@
         height: 15%;
         border-radius: 0% 0% 0% 25%;
         background-color: black;
-        position: absolute; 
+        position: absolute;
         z-index: -1;
-        top: 14%;          
-        left: 12%; 
+        top: 14%;
+        left: 12%;
       }
 
       .below-home-shape-inside-curve {
@@ -183,10 +167,10 @@
         height: 15%;
         border-radius: 0% 0% 0% 50%;
         background-color: #ff9a66;
-        position: absolute; 
+        position: absolute;
         z-index: -1;
-        top: 17%;          
-        left: 8%; 
+        top: 17%;
+        left: 8%;
       }
 
       .back-button-shape {
@@ -259,35 +243,16 @@
         left: 88.5%;
       }
 
-      .home-screen-splash-screen {
-        height: 30%;
-        width: 55%;
-        background-color: white;
-        position: absolute;
-        z-index: -1;
-        top: 55%;
-        left: 28%;
-      }
-
-      /*Images*/
-
-      .home-screen-splash-screen-placeholder {
-        top: 50%;
-        left: 35%;
-        position: absolute;
-      }
-
       /*TEXT FUNCTIONS*/
-
       .file-system {
         top: 90%;
         left: 2%;
         font-size: 30px;
         position: absolute;
-        font-family:'Courier New', Courier, monospace;      /*allows for custom fonts*/
-        word-wrap: normal;                                  /*word wrapping*/
-        width:10%;                                          /*size of invisible textbox*/
-        color: black;                                     /*font color*/
+        font-family:'Courier New', Courier, monospace;
+        word-wrap: normal;
+        width:10%;
+        color: black;
       }
 
       .about-button {
@@ -344,26 +309,6 @@
         color: white;
       }
 
-      .starfleet-online-mid-screen {
-        top: 40%;
-        left: 30%;
-        font-size: 60px;
-        position: absolute;
-        font-family: 'Courier New', Courier, monospace, bold;
-        color: #fe9900;
-      }
-
-      .home-screen-splash-screen-text {
-        top: 60%;
-        left: 11%;
-        font-size: 60px;
-        word-wrap: normal;
-        position: absolute;
-        text-align: center;
-        font-family: 'Courier New', Courier, monospace, bold;
-        color: black;
-      }
-
       /* Network Status Indicator - positioned below LCARS INTERFACE text */
       .network-status-container {
         position: absolute;
@@ -416,11 +361,137 @@
         margin-top: 2px;
       }
 
+      /* Terminal Content Area */
+      .terminal-placeholder-shape {
+        width: 55%;
+        height: 50%;
+        background-color: #0a0a0a;
+        border: 3px solid #4CAF50;
+        border-radius: 15px;
+        position: absolute;
+        top: 42%;
+        left: 28%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .terminal-header {
+        background-color: #1a1a1a;
+        padding: 10px 15px;
+        border-bottom: 2px solid #4CAF50;
+        font-family: 'Courier New', Courier, monospace;
+        color: #4CAF50;
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .terminal-title {
+        color: #4CAF50;
+      }
+
+      .terminal-cwd {
+        color: #888;
+        font-size: 14px;
+      }
+
+      .terminal-output {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        color: #00ff00;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      .terminal-output .command-line {
+        color: #ffff00;
+        margin-bottom: 5px;
+      }
+
+      .terminal-output .output-text {
+        color: #00ff00;
+        margin-bottom: 15px;
+      }
+
+      .terminal-output .error-text {
+        color: #ff4444;
+      }
+
+      .terminal-input-container {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        background-color: #1a1a1a;
+        border-top: 2px solid #4CAF50;
+      }
+
+      .terminal-prompt {
+        color: #4CAF50;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        margin-right: 10px;
+        white-space: nowrap;
+      }
+
+      .terminal-input {
+        flex: 1;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: #00ff00;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        caret-color: #00ff00;
+      }
+
+      .terminal-input::placeholder {
+        color: #444;
+      }
+
+      .clear-btn {
+        background-color: #4CAF50;
+        color: black;
+        border: none;
+        padding: 5px 15px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-left: 10px;
+      }
+
+      .clear-btn:hover {
+        background-color: #45a049;
+      }
+
+      /* Scrollbar */
+      .terminal-output::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      .terminal-output::-webkit-scrollbar-track {
+        background: #1a1a1a;
+      }
+
+      .terminal-output::-webkit-scrollbar-thumb {
+        background: #4CAF50;
+        border-radius: 5px;
+      }
+
+      .terminal-output::-webkit-scrollbar-thumb:hover {
+        background: #45a049;
+      }
 
     </style>
   </head>
   <body>
-    
+
     <!-- UI shape function calls-->
     <div class="under-home-curve"></div>
     <div class="above-about-shape-curve"></div>
@@ -536,14 +607,13 @@
     </a>
 
     <!--UI button function calls-->
-
     <div class="file-system">
       <a href="./filesystem.html">File System</a>
     </div>
     <article>
       <a href="./filesystem.html" class="file-system-shape"></a>
     </article>
-      
+
     <div class="about-button">
       <a href="./about.html">About</a>
     </div>
@@ -566,27 +636,37 @@
     </article>
 
     <div class="back-button">
-      <a href="./home.html">Back</a>            <!--Back button currently non-functional-->
+      <a href="./home.html">Back</a>
     </div>
     <article>
       <a href="./home.html" class="back-button-shape"></a>
     </article>
 
     <div class="previous-button">
-      <a href="./home.html">Previous</a>        <!--Previous button currently non-functional-->
+      <a href="./home.html">Previous</a>
     </div>
     <article>
       <a href="./home.html" class="previous-button-shape"></a>
     </article>
 
-    <!--Home page splash screen placeholder-->
-    <div class="starfleet-online-mid-screen"><b>STARFLEET COMMAND</b></div>
-    <div class="home-screen-splash-screen-text"></div>
-
-    <!--Placeholder in center of screen-->
-    <!-- <div class="home-screen-splash-screen"></div> -->
-     
-    <img src="src\images\enterprise_placeholder.gif" alt="enterprise_placeholder" class="home-screen-splash-screen-placeholder">
+    <!-- Terminal Content Area -->
+    <div class="terminal-placeholder-shape">
+      <div class="terminal-header">
+        <span class="terminal-title">LCARS TERMINAL</span>
+        <span class="terminal-cwd" id="current-dir">Loading...</span>
+      </div>
+      <div class="terminal-output" id="terminal-output">
+        <div class="output-text">LCARS Terminal v1.0</div>
+        <div class="output-text">Type commands and press Enter to execute.</div>
+        <div class="output-text">Type 'help' for available commands.</div>
+        <div class="output-text">----------------------------------------</div>
+      </div>
+      <div class="terminal-input-container">
+        <span class="terminal-prompt" id="prompt">$</span>
+        <input type="text" class="terminal-input" id="terminal-input" placeholder="Enter command..." autofocus>
+        <button class="clear-btn" id="clear-btn">CLEAR</button>
+      </div>
+    </div>
 
     <!--Audio elements for LCARS sounds-->
     <audio id="beep1" src="assets/sounds/beep1.mp3" preload="auto"></audio>
@@ -594,7 +674,8 @@
     <audio id="beep3" src="assets/sounds/beep3.mp3" preload="auto"></audio>
     <audio id="beep4" src="assets/sounds/beep4.mp3" preload="auto"></audio>
 
-    <script src="home.js"></script>
+    <script src="terminal.js"></script>
     <script src="lcars-sounds.js"></script>
+
   </body>
 </html>

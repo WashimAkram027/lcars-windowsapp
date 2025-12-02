@@ -61,5 +61,15 @@ contextBridge.exposeInMainWorld('api', {
 
     // Get network interface information
     getNetworkInfo: () => ipcRenderer.invoke('network:getNetworkInfo')
+  },
+  terminal: {
+    // Execute a command in the terminal
+    execute: (command) => ipcRenderer.invoke('terminal:execute', command),
+
+    // Get current working directory
+    getCwd: () => ipcRenderer.invoke('terminal:getCwd'),
+
+    // Reset terminal to home directory
+    reset: () => ipcRenderer.invoke('terminal:reset')
   }
 });

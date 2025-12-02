@@ -8,9 +8,8 @@ export async function createMainWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
-    show: true,
-    frame: false,            // overlay vibe (frameless)
-    alwaysOnTop: true,       // stays above other windows
+    show: false,             // hide until maximized
+    frame: true,             // native window controls (minimize, maximize, close)
     transparent: false,      // set true later if you want HUD
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
@@ -22,6 +21,10 @@ export async function createMainWindow() {
 
   // Load the Home page
   await win.loadFile(path.join(__dirname, '../renderer/home.html'));
+
+  // Maximize and show the window
+  win.maximize();
+  win.show();
 
   // Optional: devtools while developing
   // win.webContents.openDevTools({ mode: 'detach' });

@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>LCARS Overlay - Network</title>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+    <link rel="stylesheet" href="lcars-effects.css">
     <style>
       body {
         font-family: 'Courier New', Courier, monospace;
@@ -146,7 +147,45 @@
       <div style="color: #666;">Loading network interfaces...</div>
     </div>
 
-    <p style="margin-top: 40px;"><a href="./home.html">← Back to Home</a></p>
+    <p style="margin-top: 40px;"><a href="./home.html" class="back-link">← Back to Home</a></p>
+
+    <!--Audio elements for LCARS sounds-->
+    <audio id="beep1" src="assets/sounds/beep1.mp3" preload="auto"></audio>
+    <audio id="beep2" src="assets/sounds/beep2.mp3" preload="auto"></audio>
+    <audio id="beep3" src="assets/sounds/beep3.mp3" preload="auto"></audio>
+    <audio id="beep4" src="assets/sounds/beep4.mp3" preload="auto"></audio>
+
     <script src="network.js"></script>
+    <script src="lcars-sounds.js"></script>
+    <script>
+      // Add sound to back link and refresh button
+      document.addEventListener('DOMContentLoaded', () => {
+        const backLink = document.querySelector('.back-link');
+        if (backLink) {
+          backLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const audio = document.getElementById('beep2');
+            if (audio) {
+              audio.currentTime = 0;
+              audio.play().catch(err => console.log('Audio play prevented:', err.message));
+            }
+            setTimeout(() => {
+              window.location.href = backLink.getAttribute('href');
+            }, 150);
+          });
+        }
+
+        const refreshBtn = document.getElementById('refresh-button');
+        if (refreshBtn) {
+          refreshBtn.addEventListener('click', () => {
+            const audio = document.getElementById('beep1');
+            if (audio) {
+              audio.currentTime = 0;
+              audio.play().catch(err => console.log('Audio play prevented:', err.message));
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>

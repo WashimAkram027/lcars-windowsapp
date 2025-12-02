@@ -247,6 +247,9 @@ function createItemElement(item) {
  * Handle click on an item
  */
 async function handleItemClick(item) {
+  // Play click sound
+  playBeep(1);
+
   if (item.type === 'special') {
     // Handle special folders
     if (item.path === '__THIS_PC__') {

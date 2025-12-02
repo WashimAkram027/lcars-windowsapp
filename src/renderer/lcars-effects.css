@@ -1,0 +1,141 @@
+/**
+ * LCARS Effects - Animations and Visual Effects
+ * Based on www.TheLCARS.com template
+ */
+
+/* Blink Animation - For "ONLINE" text and status indicators */
+@keyframes blink {
+  0% { opacity: 0; }
+  49% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.blink {
+  animation: blink 2s infinite;
+}
+
+.blink-slow {
+  animation: blink 3500ms infinite;
+}
+
+.blink-fast {
+  animation: blink 1s infinite;
+}
+
+/* Pulse Animation - For active elements */
+@keyframes pulse {
+  0% { filter: brightness(1.0); }
+  50% { filter: brightness(0.25); }
+  100% { filter: brightness(1.0); }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+.pulse-fast {
+  animation: pulse 1s infinite;
+}
+
+.pulse-slow {
+  animation: pulse 3s infinite;
+}
+
+/* Data Cascade Animation - Animated number display (6 rows, sequential) */
+/* Numbers appear white first, then fade to orange */
+@keyframes data-cascade-1 {
+  0%, 4% { color: transparent; }
+  5%, 15% { color: white; }
+  16%, 100% { color: #f80; }
+}
+
+@keyframes data-cascade-2 {
+  0%, 9% { color: transparent; }
+  10%, 20% { color: white; }
+  21%, 100% { color: #f80; }
+}
+
+@keyframes data-cascade-3 {
+  0%, 14% { color: transparent; }
+  15%, 25% { color: white; }
+  26%, 100% { color: #f80; }
+}
+
+@keyframes data-cascade-4 {
+  0%, 19% { color: transparent; }
+  20%, 30% { color: white; }
+  31%, 100% { color: #f80; }
+}
+
+@keyframes data-cascade-5 {
+  0%, 24% { color: transparent; }
+  25%, 35% { color: white; }
+  36%, 100% { color: #f80; }
+}
+
+@keyframes data-cascade-6 {
+  0%, 29% { color: transparent; }
+  30%, 40% { color: white; }
+  41%, 100% { color: #f80; }
+}
+
+/* Data Cascade Container - single unified box */
+.data-cascade-container {
+  position: absolute;
+  top: 3%;
+  left: 20%;
+  width: 44%;
+  height: 24%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 0;
+}
+
+.data-column {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.dc-row-1 {
+  animation: data-cascade-1 4s ease infinite;
+}
+
+.dc-row-2 {
+  animation: data-cascade-2 4s ease infinite;
+}
+
+.dc-row-3 {
+  animation: data-cascade-3 4s ease infinite;
+}
+
+.dc-row-4 {
+  animation: data-cascade-4 4s ease infinite;
+}
+
+.dc-row-5 {
+  animation: data-cascade-5 4s ease infinite;
+}
+
+.dc-row-6 {
+  animation: data-cascade-6 4s ease infinite;
+}
+
+/* Button Hover Effects */
+.lcars-button-hover {
+  transition: filter 0.2s ease;
+}
+
+.lcars-button-hover:hover {
+  filter: brightness(1.15);
+}
+
+.lcars-button-hover:active {
+  filter: brightness(0.85);
+}

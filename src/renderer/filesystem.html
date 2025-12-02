@@ -6,6 +6,7 @@
     <meta charset = "utf-8"/>
     <title>LCARS Overlay - Home</title>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+    <link rel="stylesheet" href="lcars-effects.css">
     <style>
 
       body {background-color : black}
@@ -389,21 +390,21 @@
         font-style: italic;
       }
 
-      /* Network Status Indicator */
+      /* Network Status Indicator - positioned below LCARS INTERFACE text */
       .network-status-container {
         position: absolute;
-        top: 3%;
-        left: 20%;
-        width: 20%;
-        height: 7%;
+        top: 12%;
+        left: 65%;
+        width: 18%;
+        height: 6%;
         border-radius: 9999px;
         background-color: #9999cb;
         cursor: pointer;
         transition: background-color 0.3s;
         display: flex;
         align-items: center;
-        padding: 0 20px;
-        gap: 15px;
+        padding: 0 15px;
+        gap: 10px;
       }
 
       .network-status-container:hover {
@@ -482,8 +483,92 @@
 
     <!--LCARS interface text in top right-->
     <div class="LCARS-interface-text"><b>LCARS INTERFACE</b></div>
-    <div class="LCARS-interface-online-text"><b>ONLINE</b></div>
+    <div class="LCARS-interface-online-text blink"><b>ONLINE</b></div>
     <div class="LCARS-interface-online-square"></div>
+
+    <!--Data Cascade Display - Single unified box with 6 rows-->
+    <div class="data-cascade-container">
+      <div class="data-column">
+        <span class="dc-row-1">47988</span>
+        <span class="dc-row-2">21509</span>
+        <span class="dc-row-3">80254</span>
+        <span class="dc-row-4">82451</span>
+        <span class="dc-row-5">9037</span>
+        <span class="dc-row-6">15628</span>
+      </div>
+      <div class="data-column">
+        <span class="dc-row-1">93</span>
+        <span class="dc-row-2">1853</span>
+        <span class="dc-row-3">24109</span>
+        <span class="dc-row-4">3847</span>
+        <span class="dc-row-5">62901</span>
+        <span class="dc-row-6">748</span>
+      </div>
+      <div class="data-column">
+        <span class="dc-row-1">68417</span>
+        <span class="dc-row-2">31902</span>
+        <span class="dc-row-3">7024</span>
+        <span class="dc-row-4">29415</span>
+        <span class="dc-row-5">8062</span>
+        <span class="dc-row-6">51738</span>
+      </div>
+      <div class="data-column">
+        <span class="dc-row-1">585</span>
+        <span class="dc-row-2">25403</span>
+        <span class="dc-row-3">752</span>
+        <span class="dc-row-4">6194</span>
+        <span class="dc-row-5">40825</span>
+        <span class="dc-row-6">917</span>
+      </div>
+      <div class="data-column">
+        <span class="dc-row-1">19847</span>
+        <span class="dc-row-2">4206</span>
+        <span class="dc-row-3">91035</span>
+        <span class="dc-row-4">73529</span>
+        <span class="dc-row-5">1846</span>
+        <span class="dc-row-6">38207</span>
+      </div>
+      <div class="data-column">
+        <span class="dc-row-1">762</span>
+        <span class="dc-row-2">38291</span>
+        <span class="dc-row-3">1547</span>
+        <span class="dc-row-4">5093</span>
+        <span class="dc-row-5">21746</span>
+        <span class="dc-row-6">89234</span>
+      </div>
+      <div class="data-column">
+        <span class="dc-row-1">54823</span>
+        <span class="dc-row-2">9174</span>
+        <span class="dc-row-3">36502</span>
+        <span class="dc-row-4">47102</span>
+        <span class="dc-row-5">6385</span>
+        <span class="dc-row-6">92617</span>
+      </div>
+      <div class="data-column">
+        <span class="dc-row-1">8261</span>
+        <span class="dc-row-2">47093</span>
+        <span class="dc-row-3">615</span>
+        <span class="dc-row-4">815</span>
+        <span class="dc-row-5">34928</span>
+        <span class="dc-row-6">7501</span>
+      </div>
+      <div class="data-column">
+        <span class="dc-row-1">29384</span>
+        <span class="dc-row-2">7520</span>
+        <span class="dc-row-3">81946</span>
+        <span class="dc-row-4">60284</span>
+        <span class="dc-row-5">1953</span>
+        <span class="dc-row-6">48726</span>
+      </div>
+      <div class="data-column">
+        <span class="dc-row-1">4037</span>
+        <span class="dc-row-2">62815</span>
+        <span class="dc-row-3">923</span>
+        <span class="dc-row-4">2769</span>
+        <span class="dc-row-5">85041</span>
+        <span class="dc-row-6">3628</span>
+      </div>
+    </div>
 
     <!--Network Status Indicator-->
     <a href="./network.html" style="text-decoration: none;">
@@ -557,6 +642,13 @@
     </article>
 
 
+    <!--Audio elements for LCARS sounds-->
+    <audio id="beep1" src="assets/sounds/beep1.mp3" preload="auto"></audio>
+    <audio id="beep2" src="assets/sounds/beep2.mp3" preload="auto"></audio>
+    <audio id="beep3" src="assets/sounds/beep3.mp3" preload="auto"></audio>
+    <audio id="beep4" src="assets/sounds/beep4.mp3" preload="auto"></audio>
+
     <script src="filesystem.js"></script>
+    <script src="lcars-sounds.js"></script>
   </body>
 </html>
