@@ -11,6 +11,7 @@ export async function createMainWindow() {
     show: false,             // hide until maximized
     frame: true,             // native window controls (minimize, maximize, close)
     transparent: false,      // set true later if you want HUD
+    backgroundColor: '#000000',  // Black background for LCARS theme
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
       nodeIntegration: false,

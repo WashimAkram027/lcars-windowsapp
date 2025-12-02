@@ -3,6 +3,23 @@
  * Based on www.TheLCARS.com template
  */
 
+/* Antonio Font - LCARS Style */
+@font-face {
+  font-family: 'Antonio';
+  src: url('assets/fonts/Antonio-Regular.woff2') format('woff2'),
+       url('assets/fonts/Antonio-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Antonio';
+  src: url('assets/fonts/Antonio-Bold.woff2') format('woff2'),
+       url('assets/fonts/Antonio-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
 /* Blink Animation - For "ONLINE" text and status indicators */
 @keyframes blink {
   0% { opacity: 0; }
@@ -90,10 +107,11 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Antonio', 'Courier New', sans-serif;
   font-size: 14px;
   font-weight: bold;
   padding: 5px 0;
+  z-index: 30;
 }
 
 .data-column {
