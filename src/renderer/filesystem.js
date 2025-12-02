@@ -11,36 +11,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadDrives();
 });
 
-
-//Lines 15-42 display host name
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadHostName();
-});
-
-async function loadHostName()
-{
-  const [hostName] = await Promise.all([
-    window.api.system.getSystemInfo(),
-  ])
-
-  displayHostName(hostName);
-} 
-
-function displayHostName(hostName)
-{
-  setElementText('host-name', hostName.hostname);
-}
-
-function setElementText(elementId, text) {
-  const element = document.getElementById(elementId);
-  if (element) {
-    element.textContent = text;
-    element.classList.remove('loading');
-    element.classList.remove('error');
-    element.classList.remove('LCARS-interface-online-text');
-  }
-}
-
 /**
  * Set up event listeners
  */
@@ -173,7 +143,7 @@ function displayItems(items, pathLabel) {
     pathDisplay.textContent = pathLabel;
   }
 
-  // Get container
+  // Get container (which is already the grid)
   const container = document.getElementById('file-list');
   if (!container) return;
 
@@ -186,17 +156,13 @@ function displayItems(items, pathLabel) {
     return;
   }
 
-  // Create list
-  const list = document.createElement('div');
-  list.className = 'item-list';
-
+  // Just append items directly; #file-list has class="item-list"
   items.forEach(item => {
     const itemEl = createItemElement(item);
-    list.appendChild(itemEl);
+    container.appendChild(itemEl);
   });
-
-  container.appendChild(list);
 }
+
 
 /**
  * Create DOM element for a file/folder/drive item
@@ -217,6 +183,34 @@ function createItemElement(item) {
   name.className = 'item-name';
   name.textContent = item.name;
 
+  //Tooltip container
+  const tooltip = document.createElement('div');
+  tooltip.className = 'item-tooltip';
+
+  //Fill tooltip with file info from the item object
+  const lines = [];
+
+  lines.push(`<div><strong>Name:</strong> ${item.name}</div>`);
+  lines.push(`<div><strong>Type:</strong> ${item.type}</div>`);
+
+  if (item.path) {
+    lines.push(`<div><strong>Path:</strong> ${item.path}</div>`);
+  }
+
+  if (item.type === 'file' && item.size !== undefined) {
+    lines.push(`<div><strong>Size:</strong> ${formatSize(item.size)}</div>`);
+  }
+
+  if (item.modified) {
+    lines.push(`<div><strong>Modified:</strong> ${formatDate(item.modified)}</div>`);
+  }
+
+  if (item.extension) {
+    lines.push(`<div><strong>Extension:</strong> ${item.extension}</div>`);
+  }
+
+  tooltip.innerHTML = lines.join('');
+
   // Size (for files)
   const size = document.createElement('span');
   size.className = 'item-size';
@@ -235,11 +229,16 @@ function createItemElement(item) {
 
   div.appendChild(icon);
   div.appendChild(name);
-  div.appendChild(size);
-  div.appendChild(modified);
+  //div.appendChild(size);
+  //div.appendChild(modified);
+  div.appendChild(tooltip);
 
   // Click handler
   div.addEventListener('click', () => handleItemClick(item));
+
+  div.addEventListener('dblclick', () => {
+   handleItemDoubleClick(item);
+}); 
 
   return div;
 }
@@ -262,6 +261,39 @@ async function handleItemClick(item) {
   } else {
     // File clicked - show info for now
     showItemInfo(item);
+  }
+}
+
+async function handleItemDoubleClick(item) {
+  if (item.type === 'file') {
+    await executeFile(item.path);
+  } else if (item.type === 'directory' || item.type === 'drive') {
+    await loadDirectory(item.path);
+  }
+}
+
+async function executeFile(filePath) {
+  try {
+    const result = await window.api.fs.openFile(filePath);
+    updateStatus(`Opened: ${filePath}`);
+  } catch (error) {
+    console.error('Error opening file:', error);
+    updateStatus('Error opening file: ' + error.message);
+  }
+}
+
+
+/**
+ * Ask the main process to open/execute a file
+ */
+async function executeFile(filePath) {
+  try {
+    const result = await window.api.fs.openFile(filePath); // see preload/main section
+    // result can be ignored or used to show status
+    updateStatus(`Opened: ${filePath}`);
+  } catch (error) {
+    console.error('Error opening file:', error);
+    updateStatus('Error opening file: ' + error.message);
   }
 }
 
@@ -323,7 +355,6 @@ async function navigateHome() {
   try {
     const homeDir = await window.api.fs.getHomeDir();
     await loadDirectory(homeDir);
-    navigateUp();
   } catch (error) {
     console.error('Error navigating home:', error);
     updateStatus('Error: ' + error.message);
@@ -353,45 +384,46 @@ function updateStatus(message) {
 
 /**
  * Get icon for item type
- */
+   */
 function getIcon(item) {
   switch (item.type) {
     case 'special':
       if (item.path === '__THIS_PC__') {
-        return '💻';
+        return ;
       } else if (item.path === '__GALLERY__') {
-        return '🖼️';
+        return ;
       } else if (item.path === '__RECENT__') {
-        return '🕒';
+        return ;
       }
-      return '⭐';
+      return ;
     case 'drive':
-      return '💾';
+      return ;
     case 'directory':
-      return '📁';
+      return ;
     case 'file':
       // Could add specific icons based on extension
       const ext = item.extension?.toLowerCase();
       if (['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'].includes(ext)) {
-        return '🖼️';
+        return ;
       } else if (['.mp4', '.avi', '.mkv', '.mov', '.wmv'].includes(ext)) {
-        return '🎬';
+        return ;
       } else if (['.mp3', '.wav', '.flac', '.ogg', '.m4a'].includes(ext)) {
-        return '🎵';
+        return ;
       } else if (['.txt', '.md', '.log'].includes(ext)) {
-        return '📝';
+        return ;
       } else if (['.zip', '.rar', '.7z', '.tar', '.gz'].includes(ext)) {
-        return '📦';
+        return ;
       } else if (['.exe', '.msi', '.bat', '.cmd'].includes(ext)) {
-        return '⚙️';
+        return ;
       } else if (['.pdf'].includes(ext)) {
-        return '📄';
+        return ;
       }
-      return '📄';
+      return ;
     default:
-      return '❓';
+      return ;
   }
 }
+
 
 /**
  * Format file size in human-readable format
@@ -412,10 +444,60 @@ function formatDate(isoString) {
   return date.toLocaleString();
 }
 
-const hostName = window.api.system.getSystemInfo();
+let refreshInterval = null;
 
-function displayHostName(hostName)
-{
-  setElementText('host-name', hostName.hostname)
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', async () => {
+  await checkHomeConnection();
+  startHomeAutoRefresh();
+});
+
+/**
+ * Check internet connection and update home page indicator
+ */
+async function checkHomeConnection() {
+  try {
+    const result = await window.api.net.checkConnection();
+    updateHomeConnectionStatus(result.connected);
+  } catch (error) {
+    console.error('Error checking connection:', error);
+    updateHomeConnectionStatus(false);
+  }
 }
+
+/**
+ * Update the home page connection status
+ */
+function updateHomeConnectionStatus(isConnected) {
+  const icon = document.querySelector('.network-status-icon');
+  const valueText = document.querySelector('.network-status-value');
+  
+  if (!icon || !valueText) return;
+  
+  if (isConnected) {
+    // Connected - use GIF
+    icon.innerHTML = '<img src="src/images/Connected.gif" alt="Connected" style="width: 100%; height: 100%; border-radius: 50%;">';
+    valueText.textContent = 'Connected';
+  } else {
+    // Disconnected - use different GIF
+    icon.innerHTML = '<img src="src/images/DisconnectionSymbol.gif" alt="Disconnected" style="width: 100%; height: 100%; border-radius: 50%;">';
+    valueText.textContent = 'Disconnected';
+  }
+}
+
+/**
+ * Start auto-refresh timer - every 5 seconds
+ */
+function startHomeAutoRefresh() {
+  refreshInterval = setInterval(async () => {
+    await checkHomeConnection();
+  }, 1000); // 1 second
+}
+
+// Clean up on page unload
+window.addEventListener('beforeunload', () => {
+  if (refreshInterval) {
+    clearInterval(refreshInterval);
+  }
+});
 

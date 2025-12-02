@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require ('electron');
 
 /**
  * Expose a minimal, future-proof API surface to the renderer.
@@ -29,8 +29,12 @@ contextBridge.exposeInMainWorld('api', {
     // Get user's home directory
     getHomeDir: () => ipcRenderer.invoke('fs:getHomeDir'),
 
+    openFile: (filePath) => ipcRenderer.invoke('fs:openFile', filePath),
+
     // Check if path exists
     exists: (itemPath) => ipcRenderer.invoke('fs:exists', itemPath)
+
+    
   },
   system: {
     // Get general system information
