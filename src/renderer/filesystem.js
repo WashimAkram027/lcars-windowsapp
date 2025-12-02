@@ -236,6 +236,10 @@ function createItemElement(item) {
   // Click handler
   div.addEventListener('click', () => handleItemClick(item));
 
+  div.addEventListener('dblclick', () => {
+   handleItemDoubleClick(item);
+}); 
+
   return div;
 }
 
@@ -257,6 +261,39 @@ async function handleItemClick(item) {
   } else {
     // File clicked - show info for now
     showItemInfo(item);
+  }
+}
+
+async function handleItemDoubleClick(item) {
+  if (item.type === 'file') {
+    await executeFile(item.path);
+  } else if (item.type === 'directory' || item.type === 'drive') {
+    await loadDirectory(item.path);
+  }
+}
+
+async function executeFile(filePath) {
+  try {
+    const result = await window.api.fs.openFile(filePath);
+    updateStatus(`Opened: ${filePath}`);
+  } catch (error) {
+    console.error('Error opening file:', error);
+    updateStatus('Error opening file: ' + error.message);
+  }
+}
+
+
+/**
+ * Ask the main process to open/execute a file
+ */
+async function executeFile(filePath) {
+  try {
+    const result = await window.api.fs.openFile(filePath); // see preload/main section
+    // result can be ignored or used to show status
+    updateStatus(`Opened: ${filePath}`);
+  } catch (error) {
+    console.error('Error opening file:', error);
+    updateStatus('Error opening file: ' + error.message);
   }
 }
 

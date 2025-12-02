@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { ipcMain, shell } from 'electron';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
@@ -155,6 +155,18 @@ export function registerFilesystemHandlers() {
       throw error;
     }
   });
+
+  ipcMain.handle('fs:openFile', async (event, filePath) => {
+  // shell.openPath opens the file with the default application
+  const error = await shell.openPath(filePath);
+
+  if (error) {
+    // shell.openPath returns an empty string on success, or an error message
+    throw new Error(error);
+  }
+
+  return { success: true };
+});
 
   // Get recent photos from Pictures folder (recursive search)
   ipcMain.handle('fs:getRecentPhotos', async () => {
