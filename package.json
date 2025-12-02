@@ -2,20 +2,41 @@
   "name": "lcars-windowsapp",
   "version": "1.0.0",
   "private": true,
-  "description": "LCARS Windows overlay (Electron starter: main/preload/renderer skeleton)",
+  "description": "LCARS Windows Overlay - Star Trek inspired desktop interface",
   "main": "src/main/app.js",
   "type": "module",
   "scripts": {
     "dev": "electron .",
+    "build": "electron-builder --win",
     "clean": "git clean -fdX && git reset --hard"
   },
   "keywords": [],
-  "author": "",
+  "author": "Washim Akram",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^38.4.0"
+    "electron": "^38.4.0",
+    "electron-builder": "^26.0.12"
   },
   "engines": {
     "node": ">=18"
+  },
+  "build": {
+    "appId": "com.washimakram.lcars",
+    "productName": "LCARS Overlay",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
